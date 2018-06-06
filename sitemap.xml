@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://www.axisux.com/field%20notes/engineering/infrastructure/2012/12/02/Powershell-for-Google-Apps-Migration-mail-forwarding-from-exchange.html</loc>
+<lastmod>2012-12-02T00:00:00-06:00</lastmod>
+</url>
+<url>
 <loc>https://www.axisux.com/field%20notes/engineering/development/2018/06/06/add-author-to-jekyll-post.html</loc>
 <lastmod>2018-06-06T00:00:00-05:00</lastmod>
 </url>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://www.axisux.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.axisux.com/" rel="alternate" type="text/html" /><updated>2018-06-06T16:38:00-05:00</updated><id>https://www.axisux.com/</id><title type="html">Axis User Experience</title><subtitle>AxisUX is a digital branding agency focused on intersectional design and holistic systems engineering.</subtitle><entry><title type="html">Syntax Highlighting for Liquid Snippet</title><link href="https://www.axisux.com/field%20notes/engineering/development/2018/06/06/syntax-highlighting-for-liquid-snippet.html" rel="alternate" type="text/html" title="Syntax Highlighting for Liquid Snippet" /><published>2018-06-06T00:00:00-05:00</published><updated>2018-06-06T00:00:00-05:00</updated><id>https://www.axisux.com/field%20notes/engineering/development/2018/06/06/syntax-highlighting-for-liquid-snippet</id><content type="html" xml:base="https://www.axisux.com/field%20notes/engineering/development/2018/06/06/syntax-highlighting-for-liquid-snippet.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://www.axisux.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.axisux.com/" rel="alternate" type="text/html" /><updated>2018-06-06T17:24:12-05:00</updated><id>https://www.axisux.com/</id><title type="html">Axis User Experience</title><subtitle>AxisUX is a digital branding agency focused on intersectional design and holistic systems engineering.</subtitle><entry><title type="html">Syntax Highlighting for Liquid Snippet</title><link href="https://www.axisux.com/field%20notes/engineering/development/2018/06/06/syntax-highlighting-for-liquid-snippet.html" rel="alternate" type="text/html" title="Syntax Highlighting for Liquid Snippet" /><published>2018-06-06T00:00:00-05:00</published><updated>2018-06-06T00:00:00-05:00</updated><id>https://www.axisux.com/field%20notes/engineering/development/2018/06/06/syntax-highlighting-for-liquid-snippet</id><content type="html" xml:base="https://www.axisux.com/field%20notes/engineering/development/2018/06/06/syntax-highlighting-for-liquid-snippet.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
 &lt;p&gt;Liquid Engine attempts to parse code snippet contained within a markdown code block.&lt;/p&gt;
 
 &lt;h1 id=&quot;reported-errors&quot;&gt;Reported Errors:&lt;/h1&gt;
@@ -100,4 +100,101 @@
   &lt;li&gt;&lt;a href=&quot;https://dev.to/m0nica/how-to-add-author-bio-to-posts-in-jekyll-3g1&quot;&gt;Add Author Bio to Site&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/15189008/how-can-i-have-multiple-authors-for-one-post-in-jekyll&quot;&gt;Setup Post Template to Support Multiple Authors&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://jekyllrb.com/docs/configuration/#front-matter-defaults&quot;&gt;Set Default Author for Whole Jekyll Blog&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>David Midlo</name></author><category term="jekyll" /><category term="post" /><category term="front matter" /><summary type="html">Problem: Author should be listed on post in Jekyll.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>David Midlo</name></author><category term="jekyll" /><category term="post" /><category term="front matter" /><summary type="html">Problem: Author should be listed on post in Jekyll.</summary></entry><entry><title type="html">Dual-Delivery: Powershell For Google Apps Mail Forwarding From Exchange</title><link href="https://www.axisux.com/field%20notes/engineering/infrastructure/2012/12/02/Powershell-for-Google-Apps-Migration-mail-forwarding-from-exchange.html" rel="alternate" type="text/html" title="Dual-Delivery: Powershell For Google Apps Mail Forwarding From Exchange" /><published>2012-12-02T00:00:00-06:00</published><updated>2012-12-02T00:00:00-06:00</updated><id>https://www.axisux.com/field%20notes/engineering/infrastructure/2012/12/02/Powershell-for-Google-Apps-Migration-mail-forwarding-from-exchange</id><content type="html" xml:base="https://www.axisux.com/field%20notes/engineering/infrastructure/2012/12/02/Powershell-for-Google-Apps-Migration-mail-forwarding-from-exchange.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
+&lt;p&gt;When Setting up Dual-Delivery between an exchange and Google Apps Environment only limited co-existence is possible.  It’s even further away from possibility to syncronize mailbox contents and state between the two environments.&lt;/p&gt;
+
+&lt;p&gt;Within those confines, a limited level of co-existence is possible in as far as dual-delivery.  Dual Delivery configurations strickly apply recieved email, and does not syncronize folder contents, delete/archived state, or anything else.&lt;/p&gt;
+
+&lt;p&gt;This method fits into a larger migration strategy in which an organization is moving to google apps from microsoft exchange and serves as a stop-gap differential to be put in place once GSMME has migrated email, contacts, and calendars to G Suite services.  This stop gap allows a small grace-period to users as they transition to G Suite Services by delievering mail to the respective “duplicate” mailboxes in each environment.&lt;/p&gt;
+
+&lt;p&gt;This method creates a mail contact within the exchange org.  Mail is recieved and delivered first at the exchange mailbox, then forwarded to the G Suite Mailbox via a mail-enabled exchange contact.&lt;/p&gt;
+
+&lt;h1 id=&quot;solution&quot;&gt;Solution:&lt;/h1&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-powershell&quot; data-lang=&quot;powershell&quot;&gt;&lt;span class=&quot;c1&quot;&gt;### Create Mail contacts for all users within an organization unit and&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;### apply Mail Forwarding to User Mailboxes for Delievery to Exchange&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;### and Google Apps Mail and hide contacts from global address book&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#### David Midlo&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;### Run this from a domain joined computer. Must Have Exchange&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;### management shell installed.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;### Make sure you have rights to perform required operations &lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;### manually within your Active Directory and Exchange Environments.&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;### Import Required Modules. Sometimes script will fail if Exchange&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Snap-in is already loaded, comment out Add-PSSnaping in this event&lt;/span&gt;
+import-module ActiveDirectory
+Add-PSSnapin Microsoft.Exchange.Management.PowerShell.Admin
+
+&lt;span class=&quot;c1&quot;&gt;### User Defined Variables&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Define Base Disinguished Name and Destination DN for created contacts&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$rootDN&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;OU=HRAccounts,OU=StaffUsers,DC=your,DC=domain,DC=com&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$contactsDN&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;OU=GoogleForwadingContacts,DC=your,DC=domain,DC=com&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;## Define naming convention&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Google root nickname DN for filling contact mail attribute&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$GoogleNickname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;domain.com.test-google-a.com&quot;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# AD Contact Name prefix for creating contact CN result would be&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#   google.john&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ContactPrefix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;google&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;### Define Active Directory Attributes to Act on. &lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Remove empty entries from the Get-AdUser's line 'Properties' and 'select' flags&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# ObjectGuid and CN are added as reference for CSV output&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$Attribute01&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;sAMAccountName&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$Attribute02&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;mail&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$Attribute03&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ObjectGUID&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$Attribute04&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;cn&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$Attribute05&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;proxyAddress&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$Attribute06&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;targetAddress&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#######################################################################&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Reset Arrays for multiple runs&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ADUsers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$null&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$NewContacts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$null&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Capture Active Directory Users w/ attributes and place into an array&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Remeber to remove undefined attributes from this line&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Get-ADUser&lt;/span&gt; -Filter &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; -SearchBase &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$rootDN&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; -Properties &lt;span class=&quot;nv&quot;&gt;$Attribute01&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$Attribute02&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$Attribute03&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$Attribute04&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$Attribute01&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$Attribute02&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$Attribute03&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$Attribute04&lt;/span&gt; | &lt;span class=&quot;k&quot;&gt;ForEach&lt;/span&gt;-Object &lt;span class=&quot;o&quot;&gt;{[&lt;/span&gt;array]&lt;span class=&quot;nv&quot;&gt;$ADUsers&lt;/span&gt; +&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$_&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; 
+
+&lt;span class=&quot;c1&quot;&gt;# Create contacts for each entry in array&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;foreach&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ADUser&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ADUsers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# Variables Defined by Array $ADUsers&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;$UserAccount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ADUser&lt;/span&gt;.sAMAccountName
+  &lt;span class=&quot;nv&quot;&gt;$Mail&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ADUser&lt;/span&gt;.mail 
+
+  &lt;span class=&quot;c1&quot;&gt;# Create contact email based on AD user's current email&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;$ContactName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ContactPrefix&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$UserAccount&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;$Name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$Mail&lt;/span&gt;.Split&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;@&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)[&lt;/span&gt;0]
+  &lt;span class=&quot;nv&quot;&gt;$ForwardingEmail&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Name&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GoogleNickname&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# Action Cmdlets&lt;/span&gt;
+  New-MailContact -ExternalEmailAddress &lt;span class=&quot;nv&quot;&gt;$ForwardingEmail&lt;/span&gt; -Name &lt;span class=&quot;nv&quot;&gt;$ContactName&lt;/span&gt; -OrganizationalUnit &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$contactsDN&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;Set&lt;/span&gt;-MailContact -Identity &lt;span class=&quot;nv&quot;&gt;$ForwardingEmail&lt;/span&gt; -HiddenFromAddressListsEnabled &lt;span class=&quot;nv&quot;&gt;$true&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;Set&lt;/span&gt;-Mailbox -Identity &lt;span class=&quot;nv&quot;&gt;$UserAccount&lt;/span&gt; -ForwardingAddress &lt;span class=&quot;nv&quot;&gt;$ForwardingEmail&lt;/span&gt; -DeliverToMailboxAndForward &lt;span class=&quot;nv&quot;&gt;$true&lt;/span&gt;
+
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; 
+
+&lt;span class=&quot;c1&quot;&gt;# Collect Contacts from $contactsDN&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Get-ADObject&lt;/span&gt; -LDAPFilter &lt;span class=&quot;s2&quot;&gt;&quot;objectClass=Contact&quot;&lt;/span&gt; -SearchBase &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$contactsDN&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; -Properties &lt;span class=&quot;nv&quot;&gt;$Attribute04&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$Attribute02&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$Attribute05&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$Attribute06&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$Attribute03&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$Attribute04&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$Attribute02&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$Attribute05&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$Attribute06&lt;/span&gt;,&lt;span class=&quot;nv&quot;&gt;$Attribute03&lt;/span&gt; | &lt;span class=&quot;k&quot;&gt;ForEach&lt;/span&gt;-Object &lt;span class=&quot;o&quot;&gt;{[&lt;/span&gt;array]&lt;span class=&quot;nv&quot;&gt;$NewContacts&lt;/span&gt; +&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$_&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+ # Export CSVs
+ &lt;span class=&quot;nv&quot;&gt;$ADUsers&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;Export-Csv &lt;/span&gt;ADUsers.csv
+ &lt;span class=&quot;nv&quot;&gt;$NewContacts&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;Export-Csv &lt;/span&gt;ForwardingContacts.csv&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;additonal-notes&quot;&gt;Additonal Notes:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Other possible solutions might include scripted delgation, but that would have many considerations to unpack.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://support.google.com/a/answer/180898?hl=en&quot;&gt;Migrate From Microsoft Exchange&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;possible-enhancements&quot;&gt;Possible Enhancements:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mymicrosoftexchange.wordpress.com/2015/06/21/how-to-configure-mail-flow-coexistence-between-gapps-and-o365-using-internal-relay-domains-and-mail-users/&quot;&gt;SMTP Coesxistance as a Possiblity&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://community.spiceworks.com/how_to/38537-ms-exchange-and-google-apps-split-delivery-for-single-domain-name-k-12-school-sample-shown&quot;&gt;Single Domain Split Delivery&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>David Midlo</name></author><category term="Exchange" /><category term="Powershell" /><category term="Google Apps" /><category term="Dual-Delivery" /><summary type="html">Problem: When Setting up Dual-Delivery between an exchange and Google Apps Environment only limited co-existence is possible. It’s even further away from possibility to syncronize mailbox contents and state between the two environments.</summary></entry></feed>

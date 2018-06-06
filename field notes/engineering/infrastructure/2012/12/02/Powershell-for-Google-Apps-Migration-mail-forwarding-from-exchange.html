@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Dual-Delivery: Powershell For Google Apps Mail Forwarding From Exchange | Axis User Experience</title>
+<meta name="generator" content="Jekyll v3.7.3" />
+<meta property="og:title" content="Dual-Delivery: Powershell For Google Apps Mail Forwarding From Exchange" />
+<meta name="author" content="David Midlo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Problem: When Setting up Dual-Delivery between an exchange and Google Apps Environment only limited co-existence is possible. It’s even further away from possibility to syncronize mailbox contents and state between the two environments." />
+<meta property="og:description" content="Problem: When Setting up Dual-Delivery between an exchange and Google Apps Environment only limited co-existence is possible. It’s even further away from possibility to syncronize mailbox contents and state between the two environments." />
+<link rel="canonical" href="https://www.axisux.com/field%20notes/engineering/infrastructure/2012/12/02/Powershell-for-Google-Apps-Migration-mail-forwarding-from-exchange.html" />
+<meta property="og:url" content="https://www.axisux.com/field%20notes/engineering/infrastructure/2012/12/02/Powershell-for-Google-Apps-Migration-mail-forwarding-from-exchange.html" />
+<meta property="og:site_name" content="Axis User Experience" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2012-12-02T00:00:00-06:00" />
+<script type="application/ld+json">
+{"description":"Problem: When Setting up Dual-Delivery between an exchange and Google Apps Environment only limited co-existence is possible. It’s even further away from possibility to syncronize mailbox contents and state between the two environments.","author":{"@type":"Person","name":"David Midlo"},"@type":"BlogPosting","url":"https://www.axisux.com/field%20notes/engineering/infrastructure/2012/12/02/Powershell-for-Google-Apps-Migration-mail-forwarding-from-exchange.html","headline":"Dual-Delivery: Powershell For Google Apps Mail Forwarding From Exchange","dateModified":"2012-12-02T00:00:00-06:00","datePublished":"2012-12-02T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.axisux.com/field%20notes/engineering/infrastructure/2012/12/02/Powershell-for-Google-Apps-Migration-mail-forwarding-from-exchange.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://www.axisux.com/feed.xml" title="Axis User Experience" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Axis User Experience</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/fieldnotes/">field notes</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Dual-Delivery: Powershell For Google Apps Mail Forwarding From Exchange</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2012-12-02T00:00:00-06:00" itemprop="datePublished">Dec 2, 2012
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">David Midlo</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="problem">Problem:</h1>
+<p>When Setting up Dual-Delivery between an exchange and Google Apps Environment only limited co-existence is possible.  It’s even further away from possibility to syncronize mailbox contents and state between the two environments.</p>
+
+<p>Within those confines, a limited level of co-existence is possible in as far as dual-delivery.  Dual Delivery configurations strickly apply recieved email, and does not syncronize folder contents, delete/archived state, or anything else.</p>
+
+<p>This method fits into a larger migration strategy in which an organization is moving to google apps from microsoft exchange and serves as a stop-gap differential to be put in place once GSMME has migrated email, contacts, and calendars to G Suite services.  This stop gap allows a small grace-period to users as they transition to G Suite Services by delievering mail to the respective “duplicate” mailboxes in each environment.</p>
+
+<p>This method creates a mail contact within the exchange org.  Mail is recieved and delivered first at the exchange mailbox, then forwarded to the G Suite Mailbox via a mail-enabled exchange contact.</p>
+
+<h1 id="solution">Solution:</h1>
+
+<figure class="highlight"><pre><code class="language-powershell" data-lang="powershell"><span class="c1">### Create Mail contacts for all users within an organization unit and</span>
+<span class="c1">### apply Mail Forwarding to User Mailboxes for Delievery to Exchange</span>
+<span class="c1">### and Google Apps Mail and hide contacts from global address book</span>
+<span class="c1">#### David Midlo</span>
+
+<span class="c1">### Run this from a domain joined computer. Must Have Exchange</span>
+<span class="c1">### management shell installed.</span>
+<span class="c1">### Make sure you have rights to perform required operations </span>
+<span class="c1">### manually within your Active Directory and Exchange Environments.</span>
+
+<span class="c1">### Import Required Modules. Sometimes script will fail if Exchange</span>
+<span class="c1"># Snap-in is already loaded, comment out Add-PSSnaping in this event</span>
+import-module ActiveDirectory
+Add-PSSnapin Microsoft.Exchange.Management.PowerShell.Admin
+
+<span class="c1">### User Defined Variables</span>
+<span class="c1"># Define Base Disinguished Name and Destination DN for created contacts</span>
+<span class="nv">$rootDN</span> <span class="o">=</span> <span class="s2">"OU=HRAccounts,OU=StaffUsers,DC=your,DC=domain,DC=com"</span>
+<span class="nv">$contactsDN</span> <span class="o">=</span> <span class="s2">"OU=GoogleForwadingContacts,DC=your,DC=domain,DC=com"</span>
+
+<span class="c1">## Define naming convention</span>
+<span class="c1"># Google root nickname DN for filling contact mail attribute</span>
+<span class="nv">$GoogleNickname</span> <span class="o">=</span> <span class="s2">"domain.com.test-google-a.com"</span>
+<span class="c1"># AD Contact Name prefix for creating contact CN result would be</span>
+<span class="c1">#   google.john</span>
+<span class="nv">$ContactPrefix</span> <span class="o">=</span> <span class="s2">"google"</span>
+
+<span class="c1">### Define Active Directory Attributes to Act on. </span>
+<span class="c1"># Remove empty entries from the Get-AdUser's line 'Properties' and 'select' flags</span>
+<span class="c1"># ObjectGuid and CN are added as reference for CSV output</span>
+<span class="nv">$Attribute01</span> <span class="o">=</span> <span class="s2">"sAMAccountName"</span>
+<span class="nv">$Attribute02</span> <span class="o">=</span> <span class="s2">"mail"</span>
+<span class="nv">$Attribute03</span> <span class="o">=</span> <span class="s2">"ObjectGUID"</span>
+<span class="nv">$Attribute04</span> <span class="o">=</span> <span class="s2">"cn"</span>
+<span class="nv">$Attribute05</span> <span class="o">=</span> <span class="s2">"proxyAddress"</span>
+<span class="nv">$Attribute06</span> <span class="o">=</span> <span class="s2">"targetAddress"</span>
+
+<span class="c1">#######################################################################</span>
+<span class="c1"># Reset Arrays for multiple runs</span>
+<span class="nv">$ADUsers</span> <span class="o">=</span> <span class="nv">$null</span>
+<span class="nv">$NewContacts</span> <span class="o">=</span> <span class="nv">$null</span>
+
+<span class="c1"># Capture Active Directory Users w/ attributes and place into an array</span>
+<span class="c1"># Remeber to remove undefined attributes from this line</span>
+<span class="nb">Get-ADUser</span> -Filter <span class="k">*</span> -SearchBase <span class="s2">"</span><span class="nv">$rootDN</span><span class="s2">"</span> -Properties <span class="nv">$Attribute01</span>,<span class="nv">$Attribute02</span>,<span class="nv">$Attribute03</span>,<span class="nv">$Attribute04</span> | <span class="nb">select</span> <span class="nv">$Attribute01</span>,<span class="nv">$Attribute02</span>,<span class="nv">$Attribute03</span>,<span class="nv">$Attribute04</span> | <span class="k">ForEach</span>-Object <span class="o">{[</span>array]<span class="nv">$ADUsers</span> +<span class="o">=</span> <span class="nv">$_</span><span class="o">}</span> 
+
+<span class="c1"># Create contacts for each entry in array</span>
+<span class="k">foreach</span> <span class="o">(</span><span class="nv">$ADUser</span> <span class="k">in</span> <span class="nv">$ADUsers</span><span class="o">)</span> <span class="o">{</span>
+
+  <span class="c1"># Variables Defined by Array $ADUsers</span>
+  <span class="nv">$UserAccount</span> <span class="o">=</span> <span class="nv">$ADUser</span>.sAMAccountName
+  <span class="nv">$Mail</span> <span class="o">=</span> <span class="nv">$ADUser</span>.mail 
+
+  <span class="c1"># Create contact email based on AD user's current email</span>
+  <span class="nv">$ContactName</span> <span class="o">=</span> <span class="s2">"</span><span class="nv">$ContactPrefix</span><span class="s2">.</span><span class="nv">$UserAccount</span><span class="s2">"</span>
+  <span class="nv">$Name</span> <span class="o">=</span> <span class="nv">$Mail</span>.Split<span class="o">(</span><span class="s2">"@"</span><span class="o">)[</span>0]
+  <span class="nv">$ForwardingEmail</span> <span class="o">=</span> <span class="s2">"</span><span class="nv">$Name</span><span class="s2">@</span><span class="nv">$GoogleNickname</span><span class="s2">"</span>
+
+  <span class="c1"># Action Cmdlets</span>
+  New-MailContact -ExternalEmailAddress <span class="nv">$ForwardingEmail</span> -Name <span class="nv">$ContactName</span> -OrganizationalUnit <span class="s2">"</span><span class="nv">$contactsDN</span><span class="s2">"</span>
+  <span class="nb">Set</span>-MailContact -Identity <span class="nv">$ForwardingEmail</span> -HiddenFromAddressListsEnabled <span class="nv">$true</span>
+  <span class="nb">Set</span>-Mailbox -Identity <span class="nv">$UserAccount</span> -ForwardingAddress <span class="nv">$ForwardingEmail</span> -DeliverToMailboxAndForward <span class="nv">$true</span>
+
+  <span class="o">}</span> 
+
+<span class="c1"># Collect Contacts from $contactsDN</span>
+<span class="nb">Get-ADObject</span> -LDAPFilter <span class="s2">"objectClass=Contact"</span> -SearchBase <span class="s2">"</span><span class="nv">$contactsDN</span><span class="s2">"</span> -Properties <span class="nv">$Attribute04</span>,<span class="nv">$Attribute02</span>,<span class="nv">$Attribute05</span>,<span class="nv">$Attribute06</span>,<span class="nv">$Attribute03</span> | <span class="nb">select</span> <span class="nv">$Attribute04</span>,<span class="nv">$Attribute02</span>,<span class="nv">$Attribute05</span>,<span class="nv">$Attribute06</span>,<span class="nv">$Attribute03</span> | <span class="k">ForEach</span>-Object <span class="o">{[</span>array]<span class="nv">$NewContacts</span> +<span class="o">=</span> <span class="nv">$_</span><span class="o">}</span>
+
+ # Export CSVs
+ <span class="nv">$ADUsers</span> | <span class="nb">Export-Csv </span>ADUsers.csv
+ <span class="nv">$NewContacts</span> | <span class="nb">Export-Csv </span>ForwardingContacts.csv</code></pre></figure>
+
+<h1 id="additonal-notes">Additonal Notes:</h1>
+<ul>
+  <li>Other possible solutions might include scripted delgation, but that would have many considerations to unpack.</li>
+</ul>
+
+<h1 id="references">References:</h1>
+<ul>
+  <li><a href="https://support.google.com/a/answer/180898?hl=en">Migrate From Microsoft Exchange</a></li>
+</ul>
+
+<h1 id="possible-enhancements">Possible Enhancements:</h1>
+<ul>
+  <li><a href="https://mymicrosoftexchange.wordpress.com/2015/06/21/how-to-configure-mail-flow-coexistence-between-gapps-and-o365-using-internal-relay-domains-and-mail-users/">SMTP Coesxistance as a Possiblity</a></li>
+  <li><a href="https://community.spiceworks.com/how_to/38537-ms-exchange-and-google-apps-split-delivery-for-single-domain-name-k-12-school-sample-shown">Single Domain Split Delivery</a></li>
+</ul>
+
+  </div><a class="u-url" href="/field%20notes/engineering/infrastructure/2012/12/02/Powershell-for-Google-Apps-Migration-mail-forwarding-from-exchange.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Axis User Experience</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Axis User Experience</li><li><a class="u-email" href="mailto:david@axisux.com">david@axisux.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/dmidlo"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">dmidlo</span></a></li><li><a href="https://www.twitter.com/dmidlo"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">dmidlo</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>AxisUX is a digital branding agency focused on intersectional design and holistic systems engineering.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+<div id="root"></div>
+    <script type="text/javascript" src="/assets/JavaScripts/bundle.js" charset="utf-8"></script>
+  </body>
+
+</html>
