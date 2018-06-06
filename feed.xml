@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://www.axisux.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.axisux.com/" rel="alternate" type="text/html" /><updated>2018-06-06T15:56:35-05:00</updated><id>https://www.axisux.com/</id><title type="html">Axis User Experience</title><subtitle>AxisUX is a digital branding agency focused on intersectional design and holistic systems engineering.</subtitle><entry><title type="html">Syntax Highlighting for Liquid Snippet</title><link href="https://www.axisux.com/field%20notes/engineering/development/2018/06/06/syntax-highlighting-for-liquid-snippet.html" rel="alternate" type="text/html" title="Syntax Highlighting for Liquid Snippet" /><published>2018-06-06T00:00:00-05:00</published><updated>2018-06-06T00:00:00-05:00</updated><id>https://www.axisux.com/field%20notes/engineering/development/2018/06/06/syntax-highlighting-for-liquid-snippet</id><content type="html" xml:base="https://www.axisux.com/field%20notes/engineering/development/2018/06/06/syntax-highlighting-for-liquid-snippet.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
+&lt;p&gt;Liquid Engine attempts to parse code snippet contained within a markdown code block.&lt;/p&gt;
+
+&lt;h1 id=&quot;reported-errors&quot;&gt;Reported Errors:&lt;/h1&gt;
+&lt;p&gt;rendered code snippet is missing any code with enclosing liquid syntax braces&lt;/p&gt;
+
+&lt;p&gt;Example Input Code:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;{% highlight html %}
+    {%- if page.author -%}
+        • &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemprop=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;author&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemscope&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemtype=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://schema.org/Person&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;p-author h-card&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemprop=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;{{ page.author }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    {%- endif -%}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+{% endhighlight %}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Example Output&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;• &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemprop=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;author&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemscope&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemtype=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://schema.org/Person&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;p-author h-card&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemprop=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;David Midlo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;span&amp;gt;&lt;/code&gt; example above is actually enclosed with an &lt;code class=&quot;highlighter-rouge&quot;&gt;{%- if -%}{%- endif -%}&lt;/code&gt; statement but is not showing up.&lt;/li&gt;
+  &lt;li&gt;The above example also unwantedly renders the post author &lt;code class=&quot;highlighter-rouge&quot;&gt;David Midlo&lt;/code&gt; when in actuallity &lt;code class=&quot;highlighter-rouge&quot;&gt;{{ page.author }}&lt;/code&gt; was the desired text for the code snippet.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;solution&quot;&gt;Solution:&lt;/h1&gt;
+&lt;p&gt;Use of the &lt;code class=&quot;highlighter-rouge&quot;&gt;{% raw %}&lt;/code&gt; declaration solves this problem by directing liquid to parse the enclosed text as raw text instead of a liquid declaration&lt;/p&gt;
+
+&lt;p&gt;Solution Code:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;{% highlight html %}
+{% raw %}
+   {%- if page.author -%}
+        • &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemprop=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;author&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemscope&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemtype=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://schema.org/Person&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;p-author h-card&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemprop=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;{{ page.author }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    {%- endif -%}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+{% endraw %}
+{% endhighlight %}    &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;attempted-solutions&quot;&gt;Attempted Solutions:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;For a line-by-line solution, escape the beginning &lt;code class=&quot;highlighter-rouge&quot;&gt;{%-&lt;/code&gt; tag by wrapping a &lt;code class=&quot;highlighter-rouge&quot;&gt;{{ &quot;&amp;lt;content&amp;gt;&quot; }}&lt;/code&gt; block around it. &lt;em&gt;The closing tag does not need to be escaped as it is ignored by the liquid parser.&lt;/em&gt;
+    &lt;ul&gt;
+      &lt;li&gt;So &lt;code class=&quot;highlighter-rouge&quot;&gt;{%- if page.author -%}&lt;/code&gt; becomes &lt;code class=&quot;highlighter-rouge&quot;&gt;{{ &quot;{%-&quot; }} if page.author -%}&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;and &lt;code class=&quot;highlighter-rouge&quot;&gt;{%- endif -%}&lt;/code&gt; becomes &lt;code class=&quot;highlighter-rouge&quot;&gt;{{ &quot;{%-&quot; }} endif -%}&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;additonal-notes&quot;&gt;Additonal Notes:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;The line-by-line technique was used to present the solution code above. This was used here because liquid has trouble with nested &lt;code class=&quot;highlighter-rouge&quot;&gt;{% raw %}&lt;/code&gt; tags.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/19996881/is-there-no-parse-block-for-liquid&quot;&gt;Is there “no-parse” block for Liquid?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;possible-enhancements&quot;&gt;Possible Enhancements:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;It would also be reasonable to use an embed like github gists or something similar.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>David Midlo</name></author><category term="jekyll" /><category term="post" /><category term="liquid" /><category term="syntax highlighting" /><category term="code block" /><summary type="html">Problem: Liquid Engine attempts to parse code snippet contained within a markdown code block.</summary></entry><entry><title type="html">Add Author to Jekyll Post</title><link href="https://www.axisux.com/field%20notes/engineering/development/2018/06/06/add-author-to-jekyll-post.html" rel="alternate" type="text/html" title="Add Author to Jekyll Post" /><published>2018-06-06T00:00:00-05:00</published><updated>2018-06-06T00:00:00-05:00</updated><id>https://www.axisux.com/field%20notes/engineering/development/2018/06/06/add-author-to-jekyll-post</id><content type="html" xml:base="https://www.axisux.com/field%20notes/engineering/development/2018/06/06/add-author-to-jekyll-post.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
+&lt;p&gt;Author should be listed on post in Jekyll.&lt;/p&gt;
+
+&lt;h1 id=&quot;reported-errors&quot;&gt;Reported Errors:&lt;/h1&gt;
+&lt;p&gt;Author attribution not listed along with post in default jekyll theme (minima)&lt;/p&gt;
+
+&lt;h1 id=&quot;solution&quot;&gt;Solution:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ensure YAML front-matter of post includes the &lt;code class=&quot;highlighter-rouge&quot;&gt;author&lt;/code&gt; tag.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yml&quot; data-lang=&quot;yml&quot;&gt;&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;post&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Add Author to Jekyll Post&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;author&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;David Midlo&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;jekyll&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;front matter&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;categories&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;field notes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Engineering&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Development&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;attempted-solutions&quot;&gt;Attempted Solutions:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;To no effect, On first attempt I used an upper-case &lt;code class=&quot;highlighter-rouge&quot;&gt;Author:&lt;/code&gt; within the front-matter to declare the author attribute.  Front-matter requires lower-case ‘author:’&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;additonal-notes&quot;&gt;Additonal Notes:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;The conditional for whethor or not to include the author attribute is is found in the &lt;code class=&quot;highlighter-rouge&quot;&gt;post.html&lt;/code&gt; layout in &lt;code class=&quot;highlighter-rouge&quot;&gt;.\_layouts\&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;    {%- if page.author -%}
+        • &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemprop=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;author&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemscope&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemtype=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://schema.org/Person&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;p-author h-card&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemprop=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;{{ page.author }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    {%- endif -%}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jekyllrb.com/docs/configuration/#front-matter-defaults&quot;&gt;Front Matter Defaults&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;possible-enhancements&quot;&gt;Possible Enhancements:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dev.to/m0nica/how-to-add-author-bio-to-posts-in-jekyll-3g1&quot;&gt;Add Author Bio to Site&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/15189008/how-can-i-have-multiple-authors-for-one-post-in-jekyll&quot;&gt;Setup Post Template to Support Multiple Authors&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jekyllrb.com/docs/configuration/#front-matter-defaults&quot;&gt;Set Default Author for Whole Jekyll Blog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>David Midlo</name></author><category term="jekyll" /><category term="post" /><category term="front matter" /><summary type="html">Problem: Author should be listed on post in Jekyll.</summary></entry></feed>
