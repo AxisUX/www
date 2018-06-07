@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://www.axisux.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.axisux.com/" rel="alternate" type="text/html" /><updated>2018-06-07T02:22:50-05:00</updated><id>https://www.axisux.com/</id><title type="html">Axis User Experience</title><subtitle>AxisUX is a digital branding agency focused on intersectional design and holistic systems engineering.</subtitle><entry><title type="html">Update ESXi 6.0 to 6.7 via CLI</title><link href="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html" rel="alternate" type="text/html" title="Update ESXi 6.0 to 6.7 via CLI" /><published>2018-06-07T00:00:00-05:00</published><updated>2018-06-07T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://www.axisux.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.axisux.com/" rel="alternate" type="text/html" /><updated>2018-06-07T02:27:36-05:00</updated><id>https://www.axisux.com/</id><title type="html">Axis User Experience</title><subtitle>AxisUX is a digital branding agency focused on intersectional design and holistic systems engineering.</subtitle><entry><title type="html">Update ESXi 6.0 to 6.7 via CLI</title><link href="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html" rel="alternate" type="text/html" title="Update ESXi 6.0 to 6.7 via CLI" /><published>2018-06-07T00:00:00-05:00</published><updated>2018-06-07T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
 &lt;p&gt;ESXi version is out of date, Need to update ESXi from 6.0 to 6.7&lt;/p&gt;
 
 &lt;h1 id=&quot;solution&quot;&gt;Solution:&lt;/h1&gt;
@@ -39,25 +39,21 @@ RSA key fingerprint is SHA256:rPLqIVf4ns1u1T+t1Q9/STC4lubU50HiU8ccc2G5TJ0.
 Are you sure you want to continue connecting (yes/no)? yes
 Password: {enter you password}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h3 id=&quot;check-the-version-via-cli&quot;&gt;Check the Version via CLI&lt;/h3&gt;
+&lt;h4 id=&quot;check-the-version-via-cli&quot;&gt;Check the Version via CLI&lt;/h4&gt;
 
-&lt;p&gt;[root@ESXi:~] esxcli system version get&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@ESXi:~] esxcli system version get
 
-&lt;p&gt;Product: VMware ESXi&lt;/p&gt;
+   Product: VMware ESXi
+   Version: 6.0.0
+   Build: Releasebuild-3029758
+   Update: 1
+   Patch: 17&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Version: 6.0.0&lt;/p&gt;
+&lt;h4 id=&quot;enable-http-client-firewall-rule&quot;&gt;Enable HTTP Client Firewall Rule&lt;/h4&gt;
 
-&lt;p&gt;Build: Releasebuild-3029758&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@ESXi:~] esxcli network firewall ruleset &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; httpClient&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Update: 1&lt;/p&gt;
-
-&lt;p&gt;Patch: 17&lt;/p&gt;
-
-&lt;h3 id=&quot;enable-http-client-firewall-rule&quot;&gt;Enable HTTP Client Firewall Rule&lt;/h3&gt;
-
-&lt;p&gt;[root@ESXi:~] esxcli network firewall ruleset set -e true -r httpClient&lt;/p&gt;
-
-&lt;h3 id=&quot;check-vmware-repository-for-available-versions&quot;&gt;Check VMware Repository for available versions&lt;/h3&gt;
+&lt;h4 id=&quot;check-vmware-repository-for-available-versions&quot;&gt;Check VMware Repository for available versions&lt;/h4&gt;
 
 &lt;table&gt;
   &lt;tbody&gt;

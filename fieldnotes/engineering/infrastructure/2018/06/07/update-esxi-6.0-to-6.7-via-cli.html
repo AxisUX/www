@@ -89,25 +89,21 @@ RSA key fingerprint is SHA256:rPLqIVf4ns1u1T+t1Q9/STC4lubU50HiU8ccc2G5TJ0.
 Are you sure you want to continue connecting (yes/no)? yes
 Password: {enter you password}</span></code></pre></figure>
 
-<h3 id="check-the-version-via-cli">Check the Version via CLI</h3>
+<h4 id="check-the-version-via-cli">Check the Version via CLI</h4>
 
-<p>[root@ESXi:~] esxcli system version get</p>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="o">[</span>root@ESXi:~] esxcli system version get
 
-<p>Product: VMware ESXi</p>
+   Product: VMware ESXi
+   Version: 6.0.0
+   Build: Releasebuild-3029758
+   Update: 1
+   Patch: 17</code></pre></figure>
 
-<p>Version: 6.0.0</p>
+<h4 id="enable-http-client-firewall-rule">Enable HTTP Client Firewall Rule</h4>
 
-<p>Build: Releasebuild-3029758</p>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="o">[</span>root@ESXi:~] esxcli network firewall ruleset <span class="nb">set</span> <span class="nt">-e</span> <span class="nb">true</span> <span class="nt">-r</span> httpClient</code></pre></figure>
 
-<p>Update: 1</p>
-
-<p>Patch: 17</p>
-
-<h3 id="enable-http-client-firewall-rule">Enable HTTP Client Firewall Rule</h3>
-
-<p>[root@ESXi:~] esxcli network firewall ruleset set -e true -r httpClient</p>
-
-<h3 id="check-vmware-repository-for-available-versions">Check VMware Repository for available versions</h3>
+<h4 id="check-vmware-repository-for-available-versions">Check VMware Repository for available versions</h4>
 
 <table>
   <tbody>
