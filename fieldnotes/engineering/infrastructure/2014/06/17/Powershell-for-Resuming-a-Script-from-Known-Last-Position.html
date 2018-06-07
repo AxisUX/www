@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Add Author to Jekyll Post | Axis User Experience</title>
+<meta name="generator" content="Jekyll v3.7.3" />
+<meta property="og:title" content="Add Author to Jekyll Post" />
+<meta name="author" content="David Midlo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Problem: I’ve been working on some powershell that will completely automate the user account provisioning process for my organization. Currently the script is in beta, and being tested at a limited scope with great success." />
+<meta property="og:description" content="Problem: I’ve been working on some powershell that will completely automate the user account provisioning process for my organization. Currently the script is in beta, and being tested at a limited scope with great success." />
+<link rel="canonical" href="https://www.axisux.com/fieldnotes/engineering/infrastructure/2014/06/17/Powershell-for-Resuming-a-Script-from-Known-Last-Position.html" />
+<meta property="og:url" content="https://www.axisux.com/fieldnotes/engineering/infrastructure/2014/06/17/Powershell-for-Resuming-a-Script-from-Known-Last-Position.html" />
+<meta property="og:site_name" content="Axis User Experience" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2014-06-17T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Problem: I’ve been working on some powershell that will completely automate the user account provisioning process for my organization. Currently the script is in beta, and being tested at a limited scope with great success.","author":{"@type":"Person","name":"David Midlo"},"@type":"BlogPosting","url":"https://www.axisux.com/fieldnotes/engineering/infrastructure/2014/06/17/Powershell-for-Resuming-a-Script-from-Known-Last-Position.html","headline":"Add Author to Jekyll Post","dateModified":"2014-06-17T00:00:00-05:00","datePublished":"2014-06-17T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.axisux.com/fieldnotes/engineering/infrastructure/2014/06/17/Powershell-for-Resuming-a-Script-from-Known-Last-Position.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://www.axisux.com/feed.xml" title="Axis User Experience" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Axis User Experience</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/fieldnotes/">field notes</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Add Author to Jekyll Post</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2014-06-17T00:00:00-05:00" itemprop="datePublished">Jun 17, 2014
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">David Midlo</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="problem">Problem:</h1>
+<p>I’ve been working on some powershell that will completely automate the user account provisioning process for my organization.  Currently the script is in beta, and being tested at a limited scope with great success.</p>
+
+<p>There are some other moving parts required to get this off the ground.  When dealing with a directory that has 7500 real users in it, you have to make sure you’re only handling the accounts as much as you have to.  One of the mechanisms of doing that is picking up where you left off even if you stop the script for debugging.  The following is a proof-of-concept script that can be turned into a function or used as a wrapper around any script that is going through a large list using a for-each loop.   I’ve commented the code at each step so you can keep track of what the script is doing and to express some of the thought behind my decisions.   You’ll also notice that you can download this script or view it in a raw format using the links at the top right of script block.</p>
+
+<h1 id="solution">Solution:</h1>
+
+<figure class="highlight"><pre><code class="language-powershell" data-lang="powershell"><span class="c1">#############################################################################</span>
+<span class="c1">##  ScriptName: last_session.ps1</span>
+<span class="c1">##  author: @davidmidlo (twitter)    thatdamnadmin@bestdamnadmin.com</span>
+<span class="c1">## </span>
+<span class="c1">## Purpose:  a Proof of Concept script that stores the current progress of a foreach</span>
+<span class="c1">##   loop to a file to enable the script to resume from where it left off</span>
+<span class="c1">##</span>
+<span class="c1">##</span>
+<span class="c1">## Disclaimer:  No warranty and all that! This is a proof of concept script only! There is no </span>
+<span class="c1">##   error handling or anything that would potentially obscure how this operation is functioning.</span>
+<span class="c1">##   (Except for "write-progress" which is vital to not going insane while waiting for hours for</span>
+<span class="c1">##   a process to complete.)</span>
+ 
+<span class="c1">#######################################################################################</span>
+<span class="c1">## clean up the variables for consecutive runs from ISE</span>
+Import-Module activedirectory
+<span class="nb">Clear</span>-Host
+<span class="nv">$user</span> <span class="o">=</span> <span class="nv">$null</span>
+<span class="nv">$users</span> <span class="o">=</span> <span class="nv">$null</span>
+<span class="nv">$ClixmlUsers</span> <span class="o">=</span> <span class="nv">$null</span>
+<span class="nv">$rootDN</span> <span class="o">=</span> <span class="nv">$null</span>
+<span class="nv">$ImportedUserHash</span> <span class="o">=</span> <span class="nv">$null</span>
+<span class="nv">$CurrentSessionUserHash</span> <span class="o">=</span> <span class="nv">$null</span>
+<span class="c1">#######################################################################################</span>
+ 
+<span class="c1">## Define the OU</span>
+<span class="nv">$rootDN</span> <span class="o">=</span> <span class="s2">"OU=Users,DC=your,DC=com"</span>
+ 
+<span class="c1">## Initilize HashTables $importeduserhash is the datasource, $CurrentSessionUserHash is a post-run diagnostics variable</span>
+<span class="nv">$ImportedUserHash</span> <span class="o">=</span> @<span class="o">{}</span>
+<span class="nv">$CurrentSessionUserHash</span> <span class="o">=</span> @<span class="o">{}</span>
+ 
+<span class="c1">## Import Previous Runs</span>
+<span class="nv">$ImportedUserHash</span> <span class="o">=</span> <span class="nb">Import-Clixml</span> .\USERS.clixml -ErrorAction SilentlyContinue
+ 
+<span class="c1">## Get List of Users From Active Directory</span>
+<span class="nv">$Users</span> <span class="o">=</span> @<span class="o">(</span><span class="nb">Get-ADUser</span> -filter <span class="k">*</span> -SearchScope subtree -SearchBase <span class="s2">"</span><span class="nv">$rootDN</span><span class="s2">"</span> -Properties sAMAccountName,distinguishedName,homedirectory<span class="o">)</span>
+ 
+<span class="c1">## Setup Variables for Write-Progress</span>
+<span class="nv">$a</span> <span class="o">=</span> <span class="nv">$users</span>.Count
+<span class="nv">$b</span> <span class="o">=</span> <span class="nv">$ImportedUserHash</span>.count
+ 
+<span class="c1">## Notify Host of Current Progress Numbers</span>
+<span class="nb">write-host</span> <span class="s2">"imported completed user count is:"</span> <span class="nv">$b</span>
+<span class="nb">write-host</span> <span class="s2">"Active Directory user count is:"</span> <span class="nv">$a</span> 
+ 
+<span class="c1">## Begin Labor Loop</span>
+<span class="k">foreach</span><span class="o">(</span><span class="nv">$user</span> <span class="k">in</span> <span class="nv">$Users</span><span class="o">){</span>
+    <span class="c1">## Check to see if User was completed in a previous run</span>
+    <span class="k">if</span><span class="o">(</span><span class="nv">$ImportedUserHash</span>.Contains<span class="o">(</span><span class="nv">$user</span>.SamAccountName<span class="o">)){</span>
+        <span class="c1">## Notify Host that user has already been run in a previous session </span>
+        <span class="nb">Write-Host</span> <span class="nv">$user</span>.SamAccountName <span class="s2">"completed in previous session"</span> -ForegroundColor Yellow
+        <span class="c1">## Add to diagnostics variable with value set at "imported from previous session.</span>
+        <span class="nv">$CurrentSessionUserHash</span>.add<span class="o">(</span><span class="nv">$user</span>.SamAccountName,<span class="s2">"Imported From Previous Session"</span><span class="o">)</span>
+    <span class="o">}</span>
+    <span class="c1">## If user has not been run previously, take action now</span>
+        <span class="k">Else</span><span class="o">{</span>
+            <span class="c1">## wait just to give the script something to do to waste time for a demo</span>
+            <span class="nb">Start-Sleep</span> -Seconds 3
+            <span class="c1">## add user completed user to hashtable for export. This should always be the last functinal step in the foreach...</span>
+            <span class="nv">$ImportedUserHash</span>.add<span class="o">(</span><span class="nv">$user</span>.SamAccountName,<span class="nv">$user</span>.DistinguishedName<span class="o">)</span>
+            <span class="c1">## Export hashtable to clixml.  I chose clixml instead of csv for two reasons; one, it imports as the variable as it was </span>
+            <span class="c1">## exported as. Two, it will be less likely to be deleted by some other admin.</span>
+            <span class="nv">$ImportedUserHash</span> | <span class="nb">Export-Clixml</span> .\USERS.clixml
+ 
+            <span class="c1">## add user to diagnostics variable with value set to "current session"</span>
+            <span class="nv">$CurrentSessionUserHash</span>.add<span class="o">(</span><span class="nv">$user</span>.SamAccountName,<span class="s2">"Current Session"</span><span class="o">)</span>
+ 
+            <span class="c1">## notify host things went well</span>
+            <span class="nb">write-host</span> <span class="nv">$user</span>.sAMAccountName <span class="s2">"has been added to User Hashtable"</span>-ForegroundColor Green
+ 
+            <span class="c1">## +1 to the write-progress count        </span>
+            <span class="nv">$B</span>++
+        <span class="o">}</span>
+ 
+    <span class="c1">## percent of whole calculator for write-progress</span>
+    <span class="nv">$c</span> <span class="o">=</span> <span class="o">(</span><span class="nv">$b</span> / <span class="nv">$a</span><span class="o">)</span> <span class="k">*</span> 100
+ 
+    <span class="c1">## update progress bar with current statistics.</span>
+    <span class="nb">write-progress</span> -activity Updating -status <span class="s1">'Progress-&amp;gt;'</span> -percentcomplete <span class="nv">$c</span> -currentOperation <span class="s2">"Profiles Completed: </span><span class="nv">$b</span><span class="s2"> of </span><span class="nv">$a</span><span class="s2"> Percent Complete: </span><span class="nv">$c</span><span class="s2"> Current Accout: </span><span class="nv">$user</span><span class="s2">.sAMAccoutname"</span>
+<span class="o">}</span></code></pre></figure>
+
+  </div><a class="u-url" href="/fieldnotes/engineering/infrastructure/2014/06/17/Powershell-for-Resuming-a-Script-from-Known-Last-Position.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Axis User Experience</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Axis User Experience</li><li><a class="u-email" href="mailto:david@axisux.com">david@axisux.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/dmidlo"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">dmidlo</span></a></li><li><a href="https://www.twitter.com/dmidlo"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">dmidlo</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>AxisUX is a digital branding agency focused on intersectional design and holistic systems engineering.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+<div id="root"></div>
+    <script type="text/javascript" src="/assets/javascript/bundle.js" charset="utf-8"></script>
+  </body>
+
+</html>
