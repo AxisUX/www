@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Modifying DHCP options with Powershell | Axis User Experience</title>
+<meta name="generator" content="Jekyll v3.7.3" />
+<meta property="og:title" content="Modifying DHCP options with Powershell" />
+<meta name="author" content="David Midlo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Problem: If you run medium or large network with many sites, you’ll have a lot of DHCP scopes or a lot of DHCP servers because you’ll have a lot of vlans and therefore a lot of subnets. Most of which require DHCP services. Also, If you’re running a windows domain, you’re using a windows DHCP server, well, because it just makes sense (due to Dynamic DNS updating.)" />
+<meta property="og:description" content="Problem: If you run medium or large network with many sites, you’ll have a lot of DHCP scopes or a lot of DHCP servers because you’ll have a lot of vlans and therefore a lot of subnets. Most of which require DHCP services. Also, If you’re running a windows domain, you’re using a windows DHCP server, well, because it just makes sense (due to Dynamic DNS updating.)" />
+<link rel="canonical" href="https://www.axisux.com/fieldnotes/engineering/infrastructure/2013/05/19/Modifying-DHCP-Options-With-Powershell.html" />
+<meta property="og:url" content="https://www.axisux.com/fieldnotes/engineering/infrastructure/2013/05/19/Modifying-DHCP-Options-With-Powershell.html" />
+<meta property="og:site_name" content="Axis User Experience" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2013-05-19T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Problem: If you run medium or large network with many sites, you’ll have a lot of DHCP scopes or a lot of DHCP servers because you’ll have a lot of vlans and therefore a lot of subnets. Most of which require DHCP services. Also, If you’re running a windows domain, you’re using a windows DHCP server, well, because it just makes sense (due to Dynamic DNS updating.)","author":{"@type":"Person","name":"David Midlo"},"@type":"BlogPosting","url":"https://www.axisux.com/fieldnotes/engineering/infrastructure/2013/05/19/Modifying-DHCP-Options-With-Powershell.html","headline":"Modifying DHCP options with Powershell","dateModified":"2013-05-19T00:00:00-05:00","datePublished":"2013-05-19T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.axisux.com/fieldnotes/engineering/infrastructure/2013/05/19/Modifying-DHCP-Options-With-Powershell.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://www.axisux.com/feed.xml" title="Axis User Experience" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Axis User Experience</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/fieldnotes/">field notes</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Modifying DHCP options with Powershell</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2013-05-19T00:00:00-05:00" itemprop="datePublished">May 19, 2013
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">David Midlo</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="problem">Problem:</h1>
+<p>If you run medium or large network with many sites, you’ll have a lot of DHCP scopes or a lot of DHCP servers because you’ll have a lot of vlans and therefore a lot of subnets. Most of which require DHCP services. Also,  If you’re running a windows domain, you’re using a windows DHCP server, well, because it just makes sense (due to Dynamic DNS updating.)</p>
+
+<p>We recently virtualized one of our linux based PXE servers and need to update a bunch of scope’s PXE options (66 and 67.)  Here is an example of how to approach the problem using only powershell cmdlets (none of that ‘netsh’ stuff!)</p>
+
+<p>It is important to note that DHCP stores different options as different types of values, so this will work with ‘string’ type options.  To work with other types of DHCP options the principles outlined here still apply, just be sure your inputs correspond with value type of the DHCP option your working with.</p>
+
+<h1 id="solution">Solution:</h1>
+
+<figure class="highlight"><pre><code class="language-powershell" data-lang="powershell"><span class="c1">#############################################################################</span>
+<span class="c1">#  ScriptName:  Set_DHCP_Options.ps1</span>
+<span class="c1">#  Author:  @dmidlo Twitter) david@axisux.com</span>
+<span class="c1">#</span>
+<span class="c1">#  This is an example of script that collects All authorized DHCP servers </span>
+<span class="c1">#  in a windows domain and changes values.  This script also contains an </span>
+<span class="c1">#  example of excluding a set of addresses. Read through the comments within</span>
+<span class="c1">#  the script for more information.  This is using PXE related options to </span>
+<span class="c1">#  illustrate the syntax of the cmdlets, be sure to modify the script to </span>
+<span class="c1">#  suite your needs</span>
+ 
+<span class="c1">#### Change this value to PXE server's network location</span>
+<span class="nv">$ipaddress</span> <span class="o">=</span> <span class="s2">"10.1.0.1"</span>  <span class="c1"># this also can be a FQDN</span>
+ 
+<span class="c1">#### This is the name of the file located on the PXE server the client should look for</span>
+<span class="c1">#### if you use a linux based PXE server, often the bootfile name is "pxelinux.0"</span>
+<span class="c1">#### the present value is if your running a WDS or MDT server for PXE boot.  SCCM does</span>
+<span class="c1">#### not recommend the use of boot options for establishing PXE sessions, instead you </span>
+<span class="c1">#### would configure broadcast forwarders on your networking equipment to your SCCM</span>
+<span class="c1">#### server.</span>
+<span class="nv">$bootfileName</span> <span class="o">=</span> <span class="s2">"boot\x86\wdsnbp.com"</span>
+ 
+<span class="c1">#### Capture authorized DHCP servers and store them</span>
+<span class="nv">$dhcpServers</span> <span class="o">=</span> Get-DhcpServerInDC
+ 
+<span class="c1">#### Begin Labor Loop for each authorized DHCP server in the domain</span>
+<span class="k">foreach</span><span class="o">(</span><span class="nv">$dhcpServer</span> <span class="k">in</span> <span class="nv">$dhcpServers</span><span class="o">){</span>
+ 
+    <span class="c1"># get the scopes from current DHCP server</span>
+    <span class="nv">$scopes</span> <span class="o">=</span> Get-DhcpServerv4Scope -ComputerName <span class="nv">$dhcpServer</span>.DnsName
+ 
+    <span class="c1"># for each scope in the DHCP server set options PXE options 66 and 67</span>
+    <span class="k">foreach</span><span class="o">(</span><span class="nv">$scope</span> <span class="k">in</span> <span class="nv">$scopes</span><span class="o">){</span>
+        <span class="nv">$bootServerValue</span> <span class="o">=</span> Get-DhcpServerv4OptionValue -ComputerName <span class="nv">$dhcpServer</span>.DnsName -ScopeId <span class="nv">$scope</span>.ScopeId -OptionId 66
+ 
+        <span class="c1"># Exclude any Scope that begins with "10.20"</span>
+        <span class="c1">#### DHCP stores these values as strings, so we do the exclusion using string evaluation.</span>
+        <span class="c1">#### if you wanted to exclude multipe ranges you would use the '-or' operator with enclosing parentheses</span>
+        <span class="c1">#### example (($bootServerValue.Value -notlike "10.20*" ) -or ($bootServerValue.Value -notlike "10.32*" ))</span>
+        <span class="c1">#### you could also use "-like" instead of "-notlike" if you wanted to catch just a subset of scopes. Think 'Top-Down' vs 'Bottom-Up'</span>
+        <span class="k">if</span><span class="o">(</span><span class="nv">$bootServerValue</span>.Value -notlike <span class="s2">"10.20*"</span> <span class="o">){</span>
+ 
+            <span class="c1"># Set value 66 with the network location defined above</span>
+            <span class="nb">Set</span>-DhcpServerv4OptionValue -ComputerName <span class="nv">$dhcpServer</span>.DnsName -ScopeId <span class="nv">$scope</span>.ScopeId -OptionId 66 -Value <span class="s2">"</span><span class="nv">$IPadddress</span><span class="s2">"</span>
+ 
+            <span class="c1"># Set value 67 with the bootfile name defined above</span>
+            <span class="nb">Set</span>-DhcpServerv4OptionValue -ComputerName <span class="nv">$dhcpServer</span>.DnsName -ScopeId <span class="nv">$scope</span>.ScopeId -OptionId 67 -Value <span class="s2">"</span><span class="nv">$bootfileName</span><span class="s2">"</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+  </div><a class="u-url" href="/fieldnotes/engineering/infrastructure/2013/05/19/Modifying-DHCP-Options-With-Powershell.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Axis User Experience</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Axis User Experience</li><li><a class="u-email" href="mailto:david@axisux.com">david@axisux.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/dmidlo"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">dmidlo</span></a></li><li><a href="https://www.twitter.com/dmidlo"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">dmidlo</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>AxisUX is a digital branding agency focused on intersectional design and holistic systems engineering.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+<div id="root"></div>
+    <script type="text/javascript" src="/assets/javascript/bundle.js" charset="utf-8"></script>
+  </body>
+
+</html>
