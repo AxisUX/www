@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://www.axisux.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.axisux.com/" rel="alternate" type="text/html" /><updated>2018-06-30T13:57:05-05:00</updated><id>https://www.axisux.com/</id><title type="html">Axis User Experience</title><subtitle>AxisUX is a digital branding agency focused on intersectional design and holistic systems engineering.</subtitle><entry><title type="html">Update ESXi 6.0 to 6.7 via CLI</title><link href="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html" rel="alternate" type="text/html" title="Update ESXi 6.0 to 6.7 via CLI" /><published>2018-06-07T00:00:00-05:00</published><updated>2018-06-07T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://www.axisux.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.axisux.com/" rel="alternate" type="text/html" /><updated>2018-06-30T15:02:19-05:00</updated><id>https://www.axisux.com/</id><title type="html">Axis User Experience</title><subtitle>AxisUX is a digital branding agency focused on intersectional design and holistic systems engineering.</subtitle><entry><title type="html">Update ESXi 6.0 to 6.7 via CLI</title><link href="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html" rel="alternate" type="text/html" title="Update ESXi 6.0 to 6.7 via CLI" /><published>2018-06-07T00:00:00-05:00</published><updated>2018-06-07T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
 &lt;p&gt;ESXi version is out of date, Need to update ESXi from 6.0 to 6.7&lt;/p&gt;
 
 &lt;h1 id=&quot;solution&quot;&gt;Solution:&lt;/h1&gt;
@@ -555,4 +555,43 @@ Add-PSSnapin Microsoft.Exchange.Management.PowerShell.Admin
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://mymicrosoftexchange.wordpress.com/2015/06/21/how-to-configure-mail-flow-coexistence-between-gapps-and-o365-using-internal-relay-domains-and-mail-users/&quot;&gt;SMTP Coesxistance as a Possiblity&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://community.spiceworks.com/how_to/38537-ms-exchange-and-google-apps-split-delivery-for-single-domain-name-k-12-school-sample-shown&quot;&gt;Single Domain Split Delivery&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>David Midlo</name></author><category term="Exchange Server" /><category term="Powershell" /><category term="Google Apps" /><category term="Dual-Delivery" /><summary type="html">Problem: When Setting up Dual-Delivery between an exchange and Google Apps Environment only limited co-existence is possible. It’s even further away from possibility to syncronize mailbox contents and state between the two environments.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>David Midlo</name></author><category term="Exchange Server" /><category term="Powershell" /><category term="Google Apps" /><category term="Dual-Delivery" /><summary type="html">Problem: When Setting up Dual-Delivery between an exchange and Google Apps Environment only limited co-existence is possible. It’s even further away from possibility to syncronize mailbox contents and state between the two environments.</summary></entry><entry><title type="html">Basic Example of HTML Structure</title><link href="https://www.axisux.com/fieldnotes/engineering/development/2011/03/16/Basic-Example-of-HTML-Structure.html" rel="alternate" type="text/html" title="Basic Example of HTML Structure" /><published>2011-03-16T00:00:00-05:00</published><updated>2011-10-03T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/development/2011/03/16/Basic-Example-of-HTML-Structure</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/development/2011/03/16/Basic-Example-of-HTML-Structure.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
+&lt;p&gt;Though there are many ways to structure an HTML page, what is the simplest expression of common html structure.  What is the ‘Hello World of HTML’?&lt;/p&gt;
+
+&lt;h1 id=&quot;solution&quot;&gt;Solution:&lt;/h1&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- The simplest expression of an html document's structure 
+    is  made up of elements that are nested as parent, child, 
+    &amp;amp; sibling to each other.--&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- The root parent element of an html document is the &amp;lt;html&amp;gt; 
+    element. --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Though some elements are 'self-closing' elements, most HTML 
+    elements require a closing or 'end' tag. The parent &amp;lt;html&amp;gt; 
+    element along with its corresponding &amp;lt;/html&amp;gt; closing tag are 
+    an example of this. --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- to get to 'hello world'; after adding the &amp;lt;html&amp;gt; tag,
+    a '&amp;lt;body&amp;gt;&amp;lt;/body&amp;gt;' tag is needed to provide a space to declare
+    the content of the HTML document. --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;This is the title of the document or article&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- &amp;lt;h1&amp;gt; tags are used to describe the main heading.  Sub-
+    headings through to &amp;lt;h1&amp;gt;-&amp;lt;h6&amp;gt; are available --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+            This is a paragraph element.  Though it's an elementary idea;
+            When a paragraph comes after the title of a page/document, it 
+            often serves as a summary, introduction, or brief to the rest
+            of the forthcoming text.
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;This might be a Supporting Section's Title&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+                This is a paragraph element pertaining to this supporting
+                section.
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;This would be a second Support Section's Title&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+                here is another paragraph element; this time supporting
+                the second section's content.
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;  
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>David Midlo</name></author><category term="html" /><category term="structure" /><summary type="html">Problem: Though there are many ways to structure an HTML page, what is the simplest expression of common html structure. What is the ‘Hello World of HTML’?</summary></entry></feed>
