@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://www.axisux.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.axisux.com/" rel="alternate" type="text/html" /><updated>2018-07-03T18:23:38-05:00</updated><id>https://www.axisux.com/</id><title type="html">Axis User Experience</title><subtitle>AxisUX is a digital branding agency focused on intersectional design and holistic systems engineering.</subtitle><entry><title type="html">Update ESXi 6.0 to 6.7 via CLI</title><link href="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html" rel="alternate" type="text/html" title="Update ESXi 6.0 to 6.7 via CLI" /><published>2018-06-07T00:00:00-05:00</published><updated>2018-06-07T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://www.axisux.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.axisux.com/" rel="alternate" type="text/html" /><updated>2018-07-03T19:13:37-05:00</updated><id>https://www.axisux.com/</id><title type="html">Axis User Experience</title><subtitle>AxisUX is a digital branding agency focused on intersectional design and holistic systems engineering.</subtitle><entry><title type="html">Update ESXi 6.0 to 6.7 via CLI</title><link href="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html" rel="alternate" type="text/html" title="Update ESXi 6.0 to 6.7 via CLI" /><published>2018-06-07T00:00:00-05:00</published><updated>2018-06-07T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
 &lt;p&gt;ESXi version is out of date, Need to update ESXi from 6.0 to 6.7&lt;/p&gt;
 
 &lt;h1 id=&quot;solution&quot;&gt;Solution:&lt;/h1&gt;
@@ -400,11 +400,49 @@ Import-Module activedirectory
  
     &lt;span class=&quot;c1&quot;&gt;## update progress bar with current statistics.&lt;/span&gt;
     &lt;span class=&quot;nb&quot;&gt;write-progress&lt;/span&gt; -activity Updating -status &lt;span class=&quot;s1&quot;&gt;'Progress-&amp;amp;gt;'&lt;/span&gt; -percentcomplete &lt;span class=&quot;nv&quot;&gt;$c&lt;/span&gt; -currentOperation &lt;span class=&quot;s2&quot;&gt;&quot;Profiles Completed: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$b&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; of &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$a&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; Percent Complete: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$c&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; Current Accout: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$user&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.sAMAccoutname&quot;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>David Midlo</name></author><category term="Powershell" /><summary type="html">Problem: I’ve been working on some powershell that will completely automate the user account provisioning process for my organization. Currently the script is in beta, and being tested at a limited scope with great success.</summary></entry><entry><title type="html">Create Simple ToDo App 01</title><link href="https://www.axisux.com/fieldnotes/engineering/development/2013/07/13/Create-Simple-ToDo-App-01.html" rel="alternate" type="text/html" title="Create Simple ToDo App 01" /><published>2013-07-13T00:00:00-05:00</published><updated>2013-07-13T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/development/2013/07/13/Create-Simple-ToDo-App-01</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/development/2013/07/13/Create-Simple-ToDo-App-01.html">&lt;div id=&quot;ToDo-App-01-Container&quot;&gt;
-    &lt;ul id=&quot;ToDo-App-01-List&quot;&gt;
-        &lt;li&gt;Friendly Fun&lt;/li&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>David Midlo</name></author><category term="Powershell" /><summary type="html">Problem: I’ve been working on some powershell that will completely automate the user account provisioning process for my organization. Currently the script is in beta, and being tested at a limited scope with great success.</summary></entry><entry><title type="html">Simple ToDo App 01</title><link href="https://www.axisux.com/fieldnotes/engineering/development/2013/07/13/Create-Simple-ToDo-App-01.html" rel="alternate" type="text/html" title="Simple ToDo App 01" /><published>2013-07-13T00:00:00-05:00</published><updated>2013-07-13T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/development/2013/07/13/Create-Simple-ToDo-App-01</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/development/2013/07/13/Create-Simple-ToDo-App-01.html">&lt;div id=&quot;ToDoApp01Container&quot;&gt;
+    &lt;ul id=&quot;ToDoApp01List&quot; contenteditable=&quot;&quot;&gt;
+        &lt;li&gt;Click Here to Edit a List Item&lt;/li&gt;
+        &lt;li&gt;Hit 'Enter' to Create a New List Item&lt;/li&gt;
+        &lt;li&gt;Click 'Save All' to commit the current List to Storage&lt;/li&gt;
+        &lt;li&gt;Click 'Clear All' to clear the current List and restore this default list&lt;/li&gt;
     &lt;/ul&gt;
-&lt;/div&gt;</content><author><name>David Midlo</name></author><category term="html" /><category term="experiment" /><summary type="html">Friendly Fun</summary></entry><entry><title type="html">Modifying DHCP options with Powershell</title><link href="https://www.axisux.com/fieldnotes/engineering/infrastructure/2013/05/19/Modifying-DHCP-Options-With-Powershell.html" rel="alternate" type="text/html" title="Modifying DHCP options with Powershell" /><published>2013-05-19T00:00:00-05:00</published><updated>2013-05-19T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/infrastructure/2013/05/19/Modifying-DHCP-Options-With-Powershell</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/infrastructure/2013/05/19/Modifying-DHCP-Options-With-Powershell.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
+    &lt;p&gt;
+        &lt;a href=&quot;#&quot; id=&quot;ToDoApp01SaveAll&quot;&gt;Save All&lt;/a&gt;
+        &lt;a href=&quot;#&quot; id=&quot;ToDoApp01ClearAll&quot;&gt;Clear All&lt;/a&gt;
+    &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://code.jquery.com/jquery-3.3.1.slim.min.js&quot; integrity=&quot;sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+    $(document).ready(function() {
+        var ToDoApp01List = document.getElementById('ToDoApp01List');
+
+        $('#ToDoApp01SaveAll').click(function(error){
+            error.preventDefault();
+
+            localStorage.setItem('ToDoApp01', ToDoApp01List.innerHTML)
+        });
+
+        $('#ToDoApp01ClearAll').click(function(error){
+            error.preventDefault();
+
+            localStorage.clear();
+
+            location.reload();
+        });
+
+        loadToDo01();
+
+        function loadToDo01(){
+            if(localStorage.getItem('ToDoApp01')) {
+                ToDoApp01List.innerHTML = localStorage.getItem('ToDoApp01')
+            }
+        }
+
+    });
+&lt;/script&gt;</content><author><name>David Midlo</name></author><category term="html" /><category term="experiment" /><summary type="html">Click Here to Edit a List Item Hit 'Enter' to Create a New List Item Click 'Save All' to commit the current List to Storage Click 'Clear All' to clear the current List and restore this default list Save All Clear All</summary></entry><entry><title type="html">Modifying DHCP options with Powershell</title><link href="https://www.axisux.com/fieldnotes/engineering/infrastructure/2013/05/19/Modifying-DHCP-Options-With-Powershell.html" rel="alternate" type="text/html" title="Modifying DHCP options with Powershell" /><published>2013-05-19T00:00:00-05:00</published><updated>2013-05-19T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/infrastructure/2013/05/19/Modifying-DHCP-Options-With-Powershell</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/infrastructure/2013/05/19/Modifying-DHCP-Options-With-Powershell.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
 &lt;p&gt;If you run medium or large network with many sites, you’ll have a lot of DHCP scopes or a lot of DHCP servers because you’ll have a lot of vlans and therefore a lot of subnets. Most of which require DHCP services. Also,  If you’re running a windows domain, you’re using a windows DHCP server, well, because it just makes sense (due to Dynamic DNS updating.)&lt;/p&gt;
 
 &lt;p&gt;We recently virtualized one of our linux based PXE servers and need to update a bunch of scope’s PXE options (66 and 67.)  Here is an example of how to approach the problem using only powershell cmdlets (none of that ‘netsh’ stuff!)&lt;/p&gt;
