@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://www.axisux.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.axisux.com/" rel="alternate" type="text/html" /><updated>2018-07-03T19:13:37-05:00</updated><id>https://www.axisux.com/</id><title type="html">Axis User Experience</title><subtitle>AxisUX is a digital branding agency focused on intersectional design and holistic systems engineering.</subtitle><entry><title type="html">Update ESXi 6.0 to 6.7 via CLI</title><link href="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html" rel="alternate" type="text/html" title="Update ESXi 6.0 to 6.7 via CLI" /><published>2018-06-07T00:00:00-05:00</published><updated>2018-06-07T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://www.axisux.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.axisux.com/" rel="alternate" type="text/html" /><updated>2018-07-05T11:27:19-05:00</updated><id>https://www.axisux.com/</id><title type="html">Axis User Experience</title><subtitle>AxisUX is a digital branding agency focused on intersectional design and holistic systems engineering.</subtitle><entry><title type="html">Update ESXi 6.0 to 6.7 via CLI</title><link href="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html" rel="alternate" type="text/html" title="Update ESXi 6.0 to 6.7 via CLI" /><published>2018-06-07T00:00:00-05:00</published><updated>2018-06-07T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/infrastructure/2018/06/07/update-esxi-6.0-to-6.7-via-cli.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
 &lt;p&gt;ESXi version is out of date, Need to update ESXi from 6.0 to 6.7&lt;/p&gt;
 
 &lt;h1 id=&quot;solution&quot;&gt;Solution:&lt;/h1&gt;
@@ -400,7 +400,18 @@ Import-Module activedirectory
  
     &lt;span class=&quot;c1&quot;&gt;## update progress bar with current statistics.&lt;/span&gt;
     &lt;span class=&quot;nb&quot;&gt;write-progress&lt;/span&gt; -activity Updating -status &lt;span class=&quot;s1&quot;&gt;'Progress-&amp;amp;gt;'&lt;/span&gt; -percentcomplete &lt;span class=&quot;nv&quot;&gt;$c&lt;/span&gt; -currentOperation &lt;span class=&quot;s2&quot;&gt;&quot;Profiles Completed: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$b&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; of &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$a&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; Percent Complete: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$c&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; Current Accout: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$user&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.sAMAccoutname&quot;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>David Midlo</name></author><category term="Powershell" /><summary type="html">Problem: I’ve been working on some powershell that will completely automate the user account provisioning process for my organization. Currently the script is in beta, and being tested at a limited scope with great success.</summary></entry><entry><title type="html">Simple ToDo App 01</title><link href="https://www.axisux.com/fieldnotes/engineering/development/2013/07/13/Create-Simple-ToDo-App-01.html" rel="alternate" type="text/html" title="Simple ToDo App 01" /><published>2013-07-13T00:00:00-05:00</published><updated>2013-07-13T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/development/2013/07/13/Create-Simple-ToDo-App-01</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/development/2013/07/13/Create-Simple-ToDo-App-01.html">&lt;div id=&quot;ToDoApp01Container&quot;&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>David Midlo</name></author><category term="Powershell" /><summary type="html">Problem: I’ve been working on some powershell that will completely automate the user account provisioning process for my organization. Currently the script is in beta, and being tested at a limited scope with great success.</summary></entry><entry><title type="html">Simple ToDo App 02</title><link href="https://www.axisux.com/fieldnotes/engineering/development/2013/07/14/Create-Simple-ToDo-App-02.html" rel="alternate" type="text/html" title="Simple ToDo App 02" /><published>2013-07-14T00:00:00-05:00</published><updated>2013-07-14T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/development/2013/07/14/Create-Simple-ToDo-App-02</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/development/2013/07/14/Create-Simple-ToDo-App-02.html">&lt;div id=&quot;ToDoApp02Container&quot;&gt;
+    &lt;form name=&quot;ToDoApp02Form1&quot; method=&quot;post&quot; action=&quot;&quot;&gt;
+        &lt;input type=&quot;text&quot; name=&quot;ToDoApp02ToDoItem&quot; id=&quot;ToDoApp02ToDoItem&quot; autofocus=&quot;&quot; /&gt;
+        &lt;input type=&quot;button&quot; name=&quot;ToDoApp02AddToDo&quot; id=&quot;ToDoApp02AddToDo&quot; value=&quot;Add List Item&quot; /&gt;
+    &lt;/form&gt;
+    &lt;ul id=&quot;ToDoApp02ToDoList&quot; class=&quot;sortable list&quot;&gt;
+        &lt;!-- li is populated by JS --&gt;
+    &lt;/ul&gt;
+    &lt;p id=&quot;ToDoApp02DoClearAll&quot;&gt;&lt;a href=&quot;#&quot; id=&quot;ToDoApp02ClearAll&quot;&gt;Clear All&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://code.jquery.com/jquery-3.3.1.slim.min.js&quot; integrity=&quot;sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;</content><author><name>David Midlo</name></author><category term="html" /><category term="experiment" /><summary type="html">Clear All</summary></entry><entry><title type="html">Simple ToDo App 01</title><link href="https://www.axisux.com/fieldnotes/engineering/development/2013/07/13/Create-Simple-ToDo-App-01.html" rel="alternate" type="text/html" title="Simple ToDo App 01" /><published>2013-07-13T00:00:00-05:00</published><updated>2013-07-13T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/development/2013/07/13/Create-Simple-ToDo-App-01</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/development/2013/07/13/Create-Simple-ToDo-App-01.html">&lt;div id=&quot;ToDoApp01Container&quot;&gt;
     &lt;ul id=&quot;ToDoApp01List&quot; contenteditable=&quot;&quot;&gt;
         &lt;li&gt;Click Here to Edit a List Item&lt;/li&gt;
         &lt;li&gt;Hit 'Enter' to Create a New List Item&lt;/li&gt;
@@ -609,53 +620,4 @@ Add-PSSnapin Microsoft.Exchange.Management.PowerShell.Admin
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;dir=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;rtl&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ar&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;تَنْزيلات&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ar/promo/index.html&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;تَصْفِية نِهايةِ المَوْسِمِ&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>David Midlo</name></author><category term="html" /><category term="structure" /><category term="attributes" /><summary type="html">Problem: html elements by themselves, provide sematic structure for a html document. There is a need however to discribe further details of the specific elements themselves. How can attributes be asigned to html elements?</summary></entry><entry><title type="html">Basic Example of HTML Structure</title><link href="https://www.axisux.com/fieldnotes/engineering/development/2011/03/16/Basic-Example-of-HTML-Structure.html" rel="alternate" type="text/html" title="Basic Example of HTML Structure" /><published>2011-03-16T00:00:00-05:00</published><updated>2011-10-04T00:00:00-05:00</updated><id>https://www.axisux.com/fieldnotes/engineering/development/2011/03/16/Basic-Example-of-HTML-Structure</id><content type="html" xml:base="https://www.axisux.com/fieldnotes/engineering/development/2011/03/16/Basic-Example-of-HTML-Structure.html">&lt;h1 id=&quot;problem&quot;&gt;Problem:&lt;/h1&gt;
-&lt;p&gt;Though there are many ways to structure an HTML page, what is the simplest expression of common html structure.  What is the ‘Hello World of HTML’?&lt;/p&gt;
-
-&lt;h1 id=&quot;solution&quot;&gt;Solution:&lt;/h1&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- The simplest expression of an html document's structure 
-    is  made up of elements that are nested as parent, child, 
-    &amp;amp; sibling to each other.--&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- The root parent element of an html document is the &amp;lt;html&amp;gt; 
-    element. --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Though some elements are 'self-closing' elements, most HTML 
-    elements require a closing or 'end' tag. The parent &amp;lt;html&amp;gt; 
-    element along with its corresponding &amp;lt;/html&amp;gt; closing tag are 
-    an example of this. --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- The &amp;lt;head&amp;gt; element contains meta information about the
-    html document such as it's title and other details. This information
-    is used by the browser and search engines to categorize, place, and
-    rank the html document. --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Content in the &amp;lt;head&amp;gt; tag is not visible within the document. --&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;This is the title of the document or article&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- The &amp;lt;title&amp;gt; tag is used by the brower to label the tab in
-        in which the html document is open --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- to get to 'hello world'; after adding the &amp;lt;html&amp;gt; tag,
-    a '&amp;lt;body&amp;gt;&amp;lt;/body&amp;gt;' tag is all that is needed to provide space 
-    to declare the content of the HTML document. --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;This is the visible title of the document or article&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- &amp;lt;h1&amp;gt; tags are used to describe the main heading.  Sub-
-    headings through to &amp;lt;h1&amp;gt;-&amp;lt;h6&amp;gt; are available --&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
-            This is a paragraph element.  Though it's an elementary idea;
-            When a paragraph comes after the title of a page/document, it 
-            often serves as a summary, introduction, or brief to the rest
-            of the forthcoming text.
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;This might be a Supporting Section's Title&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
-                This is a paragraph element pertaining to this supporting
-                section.
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;This would be a second Support Section's Title&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
-                here is another paragraph element; this time supporting
-                the second section's content.
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;  
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>David Midlo</name></author><category term="html" /><category term="structure" /><category term="body" /><category term="p" /><category term="paragraph" /><category term="h1" /><category term="h2" /><category term="headings" /><summary type="html">Problem: Though there are many ways to structure an HTML page, what is the simplest expression of common html structure. What is the ‘Hello World of HTML’?</summary></entry></feed>
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>David Midlo</name></author><category term="html" /><category term="structure" /><category term="attributes" /><summary type="html">Problem: html elements by themselves, provide sematic structure for a html document. There is a need however to discribe further details of the specific elements themselves. How can attributes be asigned to html elements?</summary></entry></feed>
